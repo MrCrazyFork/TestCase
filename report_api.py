@@ -27,13 +27,16 @@ class ReportAPI:
         self._checker = Checker(config.REPORTS.get(self._report_name))
 
     def _get_file(self):
-        # Open connection
-        with urllib.request.urlopen(self._url_file) as f:
-            # Open file
-            with gzip.open(f, 'rb') as f_in:
-                # Write to result path
-                with open(self._result_path, 'wb') as f_out:
-                    shutil.copyfileobj(f_in, f_out)
+        try:
+            # Open connection
+            with urllib.request.urlopen(self._url_file) as f:
+                # Open file
+                with gzip.open(f, 'rb') as f_in:
+                    # Write to result path
+                    with open(self._result_path, 'wb') as f_out:
+                        shutil.copyfileobj(f_in, f_out)
+        except Exception as e:
+            raise e
 
     def _parse_json(self, json_string: str) -> dict:
         # Trying to validate

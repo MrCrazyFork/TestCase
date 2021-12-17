@@ -33,3 +33,9 @@ REPORTS = {
         "ip": str
     }
 }
+
+# Alarm
+
+SMTP_HOST = "some.smtp.server"
+ALARM_EMAIL_FROM = "email.from@domain.ru"
+ALARM_EMAILS_TO = ["email.to@domain.ru"]
