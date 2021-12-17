@@ -69,7 +69,7 @@ class SqlServer:
 
     ) -> None:
         q = """
-                insert into schema.report_input 
+                insert into schema.data_error 
                 (
                         api_report
                     ,   api_date
