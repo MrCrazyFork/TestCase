@@ -33,6 +33,11 @@ class SqlServer:
             # Simulate insert
             print(query)
 
+    def _truncate_report_table(self):
+        q = "truncate table schema.report_table"
+
+        self._dml_query(q)
+
     # Not multipurpose due to testcase
     def insert_into_report_table(
             self,
@@ -41,6 +46,10 @@ class SqlServer:
             v_context: str,
             v_ip: str
     ) -> None:
+        # There is no info in test case if this is historical table or one time use
+        # So we pretend that it's one time use table and truncate it every time
+        self._truncate_report_table()
+
         q = """
                 insert into schema.report_input 
                 (
@@ -68,6 +77,7 @@ class SqlServer:
             v_error_text: str
 
     ) -> None:
+        # We won't truncate this table to see historical errors
         q = """
                 insert into schema.data_error 
                 (
